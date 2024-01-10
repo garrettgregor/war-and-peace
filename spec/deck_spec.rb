@@ -23,4 +23,12 @@ RSpec.describe Deck do
       expect(deck.rank_of_card_at(2)).to eq(14)
     end
   end
+
+  describe "#high_ranking_cards" do
+    it "return an array of cards in the deck that have a rank of 11 or above (face cards and aces)" do
+      results = [card1, card3]
+
+      expect(deck.high_ranking_cards).to eq(results)
+    end
+  end
 end
