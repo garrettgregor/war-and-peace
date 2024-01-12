@@ -23,6 +23,8 @@ class Turn
     case
     when type == :basic
       players.max_by { |player| player.deck.rank_of_card_at(0) }
+    when type == :war
+      players.max_by { |player| player.deck.rank_of_card_at(2) }
     end
   end
 
