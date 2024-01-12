@@ -25,4 +25,13 @@ class Turn
       players.max_by { |player| player.deck.rank_of_card_at(0) }
     end
   end
+
+  def pile_cards
+    players = [player1, player2]
+
+    case when type == :basic
+      players.each { |player| spoils_of_war << player.deck.cards[0] }
+    end
+
+  end
 end
