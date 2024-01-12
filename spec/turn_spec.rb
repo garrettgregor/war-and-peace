@@ -83,13 +83,13 @@ RSpec.describe Turn do
       end
     end
 
-    # context "#pile_cards" do
-    #   it "will have each player will send one card (the top card) to the spoils pile" do
-    #     turn.pile_cards
+    context "#pile_cards" do
+      it "will have each player will send one card (the top card) to the spoils pile" do
+        turn.pile_cards
 
-    #     expect(turn.spoils_of_war).to eq([card1, card3])
-    #   end
-    # end
+        expect(turn.spoils_of_war).to eq([card1, card2, card5, card4, card3, card6])
+      end
+    end
 
     # context "#award_spoils" do
     #   it "adds each of the cards in the spoils_of_war array to the winner of the turn" do
