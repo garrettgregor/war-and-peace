@@ -37,12 +37,21 @@ RSpec.describe Turn do
 
     describe "#pile_cards" do
       it "will have each player will send one card (the top card) to the spoils pile" do
-        expect(turn.type).to eq(:basic)
-        expect(turn.winner).to eq(player1)
-
         turn.pile_cards
 
         expect(turn.spoils_of_war).to eq([card1, card3])
+      end
+    end
+
+    describe "#award_spoils" do
+      it "adds each of the cards in the @spoils_of_war array to the winner of the turn" do
+        winner = turn.winner
+
+        turn.pile_cards
+        turn.award_spoils(winner)
+
+        expect(player1.deck.cards).to match_array([card2, card5, card8, card1, card3])
+        expect(player2.deck.cards).to eq([card4, card6, card7])
       end
     end
   end
