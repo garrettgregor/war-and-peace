@@ -32,8 +32,10 @@ class Turn
     case
     when type == :basic
       players.each { |player| spoils_of_war << player.deck.cards.shift }
+    when type == :war
+      players.each { |player| spoils_of_war << player.deck.cards.shift(3) }
+      spoils_of_war.flatten!
     end
-
   end
 
   def award_spoils(winner)
