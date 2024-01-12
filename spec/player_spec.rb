@@ -9,36 +9,34 @@ RSpec.describe Player do
   let!(:deck) { Deck.new([card1, card2, card3]) }
   let!(:player) { Player.new('Clarisa', deck) }
 
-  describe "initialize" do
+  describe "#initialize" do
     it "exists with a name and a deck" do
       expect(player).to be_a(Player)
       expect(player.name).to eq("Clarisa")
       expect(player.deck).to eq(deck)
     end
   end
+
+  describe "#has_lost?" do
+    it "determines whether a player has lost" do
+      expect(player.has_lost?).to eq(false)
+      
+      player.deck.remove_card
+
+      expect(player.has_lost?).to eq(false)
+      
+      player.deck.remove_card
+
+      expect(player.has_lost?).to eq(false)
+      
+      player.deck.remove_card
+
+      expect(player.has_lost?).to eq(true)
+    end
+  end
 end
 
 
-# pry(main)> player.has_lost?
-# #=> false
-
-# pry(main)> player.deck.remove_card
-# #=> #<Card:0x007f9cc3a73a98 @rank=12, @suit=:diamond, @value="Queen">
-
-# pry(main)> player.has_lost?
-# #=> false
-
-# pry(main)> player.deck.remove_card
-# #=> #<Card:0x007f9cc3a03720 @rank=3, @suit=:spade, @value="3">
-
-# pry(main)> player.has_lost?
-# #=> false
-
-# pry(main)> player.deck.remove_card
-# #=> #<Card:0x007f9cc3a44c98 @rank=14, @suit=:heart, @value="Ace">
-
-# pry(main)> player.has_lost?
-# #=> true
 
 # pry(main)> player.deck
 # #=> #<Deck:0x007f9cc396bdf8 @cards=[]>
