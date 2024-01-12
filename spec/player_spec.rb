@@ -20,23 +20,19 @@ RSpec.describe Player do
   describe "#has_lost?" do
     it "determines whether a player has lost" do
       expect(player.has_lost?).to eq(false)
-      
+
       player.deck.remove_card
 
       expect(player.has_lost?).to eq(false)
-      
+
       player.deck.remove_card
 
       expect(player.has_lost?).to eq(false)
-      
+
       player.deck.remove_card
 
       expect(player.has_lost?).to eq(true)
+      expect(player.deck.cards).to eq([])
     end
   end
 end
-
-
-
-# pry(main)> player.deck
-# #=> #<Deck:0x007f9cc396bdf8 @cards=[]>
