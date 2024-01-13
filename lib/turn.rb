@@ -39,11 +39,8 @@ class Turn
   end
 
   def award_spoils(winner)
-    case
-    when type == :basic
-      while !spoils_of_war.empty?
-        winner.deck.cards << spoils_of_war.pop
-      end
+    while !spoils_of_war.empty?
+      winner.deck.cards << spoils_of_war.pop
     end
   end
 end
