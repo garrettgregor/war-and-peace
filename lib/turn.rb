@@ -11,11 +11,11 @@ class Turn
   def type
     if player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
       :basic
-    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
-      :war
     elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
       player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
       :mutually_assured_destruction
+    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
+      :war
     end
   end
 
@@ -25,6 +25,8 @@ class Turn
       players.max_by { |player| player.deck.rank_of_card_at(0) }
     when type == :war
       players.max_by { |player| player.deck.rank_of_card_at(2) }
+    when type == :mutually_assured_destruction
+      "No Winner"
     end
   end
 
@@ -35,6 +37,8 @@ class Turn
     when type == :war
       players.each { |player| spoils_of_war << player.deck.cards.shift(3) }
       spoils_of_war.flatten!
+    when type == :mutually_assured_destruction
+      players.each { |player| player.deck.cards.shift(3) }
     end
   end
 
