@@ -20,24 +20,24 @@ class Turn
   end
 
   def winner
-    case
-    when type == :basic
+    case type
+    when :basic
       players.max_by { |player| player.deck.rank_of_card_at(0) }
-    when type == :war
+    when :war
       players.max_by { |player| player.deck.rank_of_card_at(2) }
-    when type == :mutually_assured_destruction
+    when :mutually_assured_destruction
       "No Winner"
     end
   end
 
   def pile_cards
-    case
-    when type == :basic
+    case type
+    when :basic
       players.each { |player| spoils_of_war << player.deck.cards.shift }
-    when type == :war
+    when :war
       players.each { |player| spoils_of_war << player.deck.cards.shift(3) }
       spoils_of_war.flatten!
-    when type == :mutually_assured_destruction
+    when :mutually_assured_destruction
       players.each { |player| player.deck.cards.shift(3) }
     end
   end
