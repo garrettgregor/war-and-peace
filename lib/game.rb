@@ -1,12 +1,11 @@
 class Game
-  attr_reader :player1, :player2, :turn
+  attr_reader :player1, :player2
   attr_accessor :turn_count
 
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
     @turn_count = 0
-    @turn = Turn.new(player1, player2)
   end
 
   def start
@@ -37,8 +36,9 @@ class Game
   end
 
   def play
-    while !player1.has_lost? || !player2.has_lost? || @turn_count <= 1_000_000
+    while !player1.has_lost? && !player2.has_lost? && @turn_count <= 1_000_000
       @turn_count += 1
+      turn = Turn.new(player1, player2)
 
       if turn.type == :mutually_assured_destruction
         puts "Turn #{@turn_count}: *mutually assured destruction* 6 cards removed from play"
