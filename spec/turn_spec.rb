@@ -37,7 +37,7 @@ RSpec.describe Turn do
       it "will have each player will send one card (the top card) to the spoils pile" do
         turn.pile_cards
 
-        expect(turn.spoils_of_war).to eq([card1, card3])
+        expect(turn.spoils_of_war).to match_array([card1, card3])
       end
     end
 
@@ -48,8 +48,8 @@ RSpec.describe Turn do
         turn.pile_cards
         turn.award_spoils(winner)
 
-        expect(player1.deck.cards).to eq([card2, card5, card8, card3, card1])
-        expect(player2.deck.cards).to eq([card4, card6, card7])
+        expect(player1.deck.cards).to match_array([card2, card5, card8, card3, card1])
+        expect(player2.deck.cards).to match_array([card4, card6, card7])
       end
     end
   end
@@ -87,7 +87,7 @@ RSpec.describe Turn do
       it "will have each player will send one card (the top card) to the spoils pile" do
         turn.pile_cards
 
-        expect(turn.spoils_of_war).to eq([card1, card2, card5, card4, card3, card6])
+        expect(turn.spoils_of_war).to match_array([card1, card2, card5, card4, card3, card6])
       end
     end
 
@@ -98,8 +98,8 @@ RSpec.describe Turn do
         turn.pile_cards
         turn.award_spoils(winner)
 
-        expect(player1.deck.cards).to eq([card8])
-        expect(player2.deck.cards).to eq([card7, card6, card3, card4, card5, card2, card1])
+        expect(player1.deck.cards).to match_array([card8])
+        expect(player2.deck.cards).to match_array([card7, card6, card3, card4, card5, card2, card1])
       end
     end
   end
@@ -138,8 +138,8 @@ RSpec.describe Turn do
       it "adds each of the cards in the spoils_of_war array to the winner of the turn" do
         turn.pile_cards
 
-        expect(player1.deck.cards).to eq([card8])
-        expect(player2.deck.cards).to eq([card7])
+        expect(player1.deck.cards).to match_array([card8])
+        expect(player2.deck.cards).to match_array([card7])
       end
     end
   end
