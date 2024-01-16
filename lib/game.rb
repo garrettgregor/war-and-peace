@@ -16,11 +16,11 @@ class Game
     |    ♥    |    |    ♠    |
     |         |    |         |
     |_________|    |_________|
-         /\             /\
-        /  \           /  \
+         /\\             /\\
+        /  \\           /  \\
        |    |    vs   |    |
-        \  /           \  /
-         \/             \/"
+        \\  /           \\  /
+         \\/             \\\/"
 
     puts "Welcome to War! (or Peace) This game will be played with 52 cards."
     puts " Enter 'p' to play. Enter 'q' to quit. \n"
