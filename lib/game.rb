@@ -1,11 +1,9 @@
 class Game
   attr_reader :player1, :player2
-  attr_accessor :turn_count
 
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
-    @turn_count = 0
   end
 
   def start
@@ -36,28 +34,32 @@ class Game
   end
 
   def play
-    while !player1.has_lost? && !player2.has_lost? && @turn_count <= 1_000_000
-      @turn_count += 1
+    turn_count = 0
+
+    while !player1.has_lost? || !player2.has_lost? || turn_count == 1_000_000
+      turn_count += 1
       turn = Turn.new(player1, player2)
+      winner = turn.winner
 
       if turn.type == :mutually_assured_destruction
-        puts "Turn #{@turn_count}: *mutually assured destruction* 6 cards removed from play"
-      elsif turn.type == :basic
         turn.pile_cards
-        turn.award_spoils(turn.winner)
-        puts "Turn #{@turn_count}: #{turn.winner.name} won 2 cards"
+        puts "Turn #{turn_count}: *mutually assured destruction* 6 cards removed from play"
       elsif turn.type == :war
         turn.pile_cards
-        turn.award_spoils(turn.winner)
-        puts "Turn #{@turn_count}: WAR - #{turn.winner.name} won 6 cards"
+        turn.award_spoils(winner)
+        puts "Turn #{turn_count}: WAR - #{winner.name} won 6 cards"
+      elsif turn.type == :basic
+        turn.pile_cards
+        turn.award_spoils(winner)
+        puts "Turn #{turn_count}: #{winner.name} won 2 cards"
       end
 
-      if player1.has_lost?
-        puts "*~*~*~* #{player2.name} has won the game! *~*~*~*"
-      elsif player2.has_lost?
-        puts "*~*~*~* #{player1.name} has won the game! *~*~*~*"
-      elsif turn_count == 1000000
-        puts "---- DRAW ----"
+      if turn.player1.has_lost?
+        return puts "*~*~*~* #{player2.name} has won the game! *~*~*~*"
+      elsif turn.player2.has_lost?
+        return puts "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+      elsif turn_count == 1_000_000
+        return puts "---- DRAW ----"
       end
     end
   end
