@@ -43,8 +43,10 @@ class Turn
   end
 
   def award_spoils(winner)
-    while !spoils_of_war.empty?
-      winner.deck.cards << spoils_of_war.pop
-    end
+    winner.deck.cards.concat(spoils_of_war)
+    spoils_of_war.clear
+    # while !spoils_of_war.empty?
+    #   winner.deck.cards << spoils_of_war.pop
+    # end
   end
 end
